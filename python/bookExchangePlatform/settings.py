@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import logging
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mr3=s0cco@=#^#7a4#-n5o0t9xu_6p$ip3t60%dd$jupcl$!=&'
+# Fetch SECRET_KEY from the .env file
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -116,11 +118,11 @@ WSGI_APPLICATION = 'bookExchangePlatform.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'book_exchange',  # Your database name
-        'USER': 'rajath',  # Your MySQL username
-        'PASSWORD': 'nC%&btu12',  # Your MySQL password
-        'HOST': 'localhost',  # Set to 'localhost' or your database host
-        'PORT': '3306',  # Default MySQL port
+        'NAME': config('DATABASE_NAME', default='book_exchange'),  # Load from .env or use default
+        'USER': config('DATABASE_USER', default='rajath'),  # Load from .env or use default
+        'PASSWORD': config('DATABASE_PASSWORD', default='nC%&btu12'),  # Load from .env or use default
+        'HOST': config('DATABASE_HOST', default='localhost'),  # Load from .env or use default
+        'PORT': config('DATABASE_PORT', default='3306', cast=int),  # Load from .env or use default
     }
 }
 
