@@ -184,8 +184,9 @@ LOGGING = {
 }
 
 # Twilio SendGrid API Key
-SENDGRID_API_KEY = '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'
-SENDGRID_FROM_EMAIL = 'vsr291999@gmail.com'
+config('SENDGRID_API_KEY')
+SENDGRID_API_KEY = config('SENDGRID_API_KEY')
+SENDGRID_FROM_EMAIL = config('SENDGRID_FROM_EMAIL')
 
 CACHES = {
     'default': {
